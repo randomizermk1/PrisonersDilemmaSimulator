@@ -165,11 +165,11 @@ def testStrategy(strategy, rep):
     print(a, "  N:", rep)
 
     print('')
-    print("TotalAVG:", ((opscore * 10) + selfscore) / 11)
+    print("TotalAVG:", ((opscore * (len(strategies) - 1)) + selfscore) / len(strategies))
     print("VS_self", statlist(selfscore))
     print("VS_OPP", statlist(opscore))
 
-    var1 = ("TotalAVG " + str(((opscore * 10) + selfscore) / 11) + ", " + "VS_self " + str(
+    var1 = ("TotalAVG " + str(((opscore * (len(strategies) - 1)) + selfscore) / len(strategies)) + ", " + "VS_self " + str(
         statlist(selfscore)) + "," + "VS_OPP" + str(statlist(opscore)) + "," + 'Total trials ' + str(rep))
     fi.write(f"{var1}\n")
     fi.close()

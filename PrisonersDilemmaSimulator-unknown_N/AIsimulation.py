@@ -127,7 +127,7 @@ def testStrategy(strategy, rep):
     print(a, "  N:", rep)
 
     print('')
-    print("TotalAVG:", ((opscore * 10) + selfscore) / 11)
+    print("TotalAVG:", ((opscore * (len(strategies) - 1)) + selfscore) / len(strategies))
     print("VS_self", statlist(selfscore))
     print("VS_OPP", statlist(opscore))
 
