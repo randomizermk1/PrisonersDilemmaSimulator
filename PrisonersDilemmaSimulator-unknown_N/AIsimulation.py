@@ -1,5 +1,5 @@
 import timeit, Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger, \
-    pavlov, Simple_Credit_rate, Generous_Credit_rate
+    pavlov, Simple_Credit_rate, Generous_Credit_rate, os.path
 
 strategies = [Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger,
               pavlov, Simple_Credit_rate, Generous_Credit_rate]
@@ -76,18 +76,6 @@ def statlist(results):
         return round(results, 4)
     else:
         return round(results, 2)
-
-
-def Print_spool(Numb, strategy):
-    global name
-    nmstr = str(strategy)
-    p, m, q = nmstr.rsplit("'", 2)
-    m, p, q = p.rsplit("'", 2)
-    r = str(round(Numb / 1000))
-    name1 = str(r + 'k' + '_' + p)
-    f = open("%s.csv" % name1, "w")
-    f.write("SelfScore,W/L,OtherScore,E(u)Self,E(u)Opp" + '\n')
-    return f
 
 
 def timer(stop, start):

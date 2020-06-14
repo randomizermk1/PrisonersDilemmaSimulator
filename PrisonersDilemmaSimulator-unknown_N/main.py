@@ -6,6 +6,7 @@
 
 import AIsimulation
 import AIsimulation_log
+import AIsimulation_log_sum
 import timeit
 import Always_Collude
 import Always_Defect
@@ -61,9 +62,12 @@ def sim(choice):
     if choice == 1:
         print("--------------------------------------------------------")
         if log == "1":
-            print('Logging enabled')
+            print('Total Logging enabled')
+        if log == "2":
+            print('Summary Logging enabled')
         else:
             print('Logging disabled')
+        print(" ")
         print('here are the strategies, choose one')
         print(" ")
         print(choices1)
@@ -81,6 +85,8 @@ def sim(choice):
         start1 = timeit.default_timer()
         if log == '1':
             AIsimulation_log.testStrategy(strategy, repeater * 1000)
+        if log == '2':
+            AIsimulation_log_sum.testStrategy(strategy, repeater * 1000)
         else:
             AIsimulation.testStrategy(strategy, repeater * 1000)
         choice = 0
@@ -90,7 +96,7 @@ def sim(choice):
         timer(stop1, start1)
     print(" ")
     choice = int(input('press 1 to repeat'))
-
+    print(" ")
 
 while True:
     choices1 = ['1-Always_Collude', '2-Always_Defect', '3-TitForTat']
@@ -100,7 +106,9 @@ while True:
     strategies = {1: Always_Collude, 2: Always_Defect, 3: TitForTat, 4: Total_random, 5: randomColluding,
                   6: randomDefecting,
                   7: Grim_trigger, 8: pavlov, 9: Simple_Credit_rate, 10: Generous_Credit_rate}
-    log = input('press 1 to log entire sim. Press any other key to disregard: ')
+    print('press 1 to log entire results')
+    print('press 2 to log only summarized results')
+    log = input('Press any other key to disregard: ')
     choice = 1
     sim(choice)
 

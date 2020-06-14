@@ -15,7 +15,6 @@ def game(player1, player2, rounds):
     p2Score = 0
     p1Move = player1.play('start')
     p2Move = player2.play('start')
-    ff = Print_spool0(rounds, player1.name(),player2.name())
     for i in range(rounds):
         if p1Move == 1 and p2Move == 1:
             p1Score += 1
@@ -33,8 +32,6 @@ def game(player1, player2, rounds):
             p2Score -= 1
             p1Score -= 1
 
-        var = (str(p1Move) + ',' + str(p2Move) + ',' + str(p1Score) + ',' + str(p2Score))
-        ff.write(f"{var}\n")
         prevP1Move = p1Move
         prevP2Move = p2Move
         p1Move = player1.play(prevP2Move)
@@ -92,19 +89,6 @@ def Print_spool(Numb, strategy):
     f = open(file_path, "w")
     f.write("SelfScore,W/L,OtherScore,E(u)Self,E(u)Opp" + '\n')
     return f
-
-
-
-def Print_spool0(Numb, playername1 , playername2):
-    name1 = str(playername1 + '_' + playername2 + str(Numb/1000)+'k')
-    directory = './%s_log/' % playername1
-    file_path = os.path.join(directory, "%s_log.csv" % name1)
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
-    f = open(file_path, "w")
-    f.write("P1Move,P2Move,P1Score,P2Score," + '\n')
-    return f
-
 
 def timer(stop, start):
     if (stop - start) < 0.05:
