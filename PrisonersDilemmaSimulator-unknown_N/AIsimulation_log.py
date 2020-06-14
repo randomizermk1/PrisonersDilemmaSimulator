@@ -1,5 +1,5 @@
 import timeit, Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger, \
-    pavlov, Simple_Credit_rate, Generous_Credit_rate
+    pavlov, Simple_Credit_rate, Generous_Credit_rate, os.path
 
 strategies = [Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger,
               pavlov, Simple_Credit_rate, Generous_Credit_rate]
@@ -58,7 +58,7 @@ def game(player1, player2, rounds):
                 return p1Score / int(rounds), p1Score / int(rounds) ,(player1.name(), 'Balance_out', player2.name())
 
     else:
-        if p1Move == p2Move:
+        if p1Score == p2Score and p1Move == p2Move:
             if p1Score < 0:
                 return (p1Score + p2Score) / (2 * int(rounds)), p1Score / int(rounds), p2Score / int(rounds), (
                 player1.name(), 'Defects', player1.name())
@@ -67,7 +67,7 @@ def game(player1, player2, rounds):
                 player1.name(), 'Coops', player1.name())
         else:
             return (p1Score + p2Score) / (2 * int(rounds)), p1Score / int(rounds), p2Score / int(rounds), (
-                player1.name(), 'Oscillates', player1.name())
+                player1.name(), 'Diverges', player1.name())
 
 
 def statlist(results):
@@ -83,19 +83,31 @@ def statlist(results):
 
 def Print_spool(Numb, strategy):
     global name
-    nmstr = str(strategy)
-    p, m, q = nmstr.rsplit("'", 2)
-    m, p, q = p.rsplit("'", 2)
     r = str(round(Numb / 1000))
-    name1 = str(r + 'k' + '_' + p)
-    f = open("%s.csv" % name1, "w")
+    name1 = str(r + 'k' +  'Table' + '_' + strategy.name())
+    predir='./Output/'
+    if not os.path.exists(predir):
+        os.mkdir(predir)
+    directory = './Output/%s_Results/' % strategy.name()
+    file_path = os.path.join(directory, "%s.csv" % name1)
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+    f = open(file_path, "w")
     f.write("SelfScore,W/L,OtherScore,E(u)Self,E(u)Opp" + '\n')
     return f
 
 
+
 def Print_spool0(Numb, playername1 , playername2):
-    name1 = str(playername1 + '_' + playername2 + str(Numb/1000)+'k')
-    f = open("%s_log.csv" % name1, "w")
+    name1 = str('VS'+ '_' + playername2 + '_' + str(Numb/1000)+'k')
+    predir = './Output/'
+    if os.path.isabs(predir):
+        os.mkdir(predir)
+    directory = './Output/%s_log/' % playername1
+    file_path = os.path.join(directory, "%s_log.csv" % name1)
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+    f = open(file_path, "w")
     f.write("P1Move,P2Move,P1Score,P2Score," + '\n')
     return f
 
@@ -118,6 +130,7 @@ def testStrategy(strategy, rep):
 
     fi = Print_spool(rep, strategy)
     print("--------------------------------------------------------")
+    print('P1=', strategy.name())
     print('When N =', rep)
     print(" ")
     for s in strategies:

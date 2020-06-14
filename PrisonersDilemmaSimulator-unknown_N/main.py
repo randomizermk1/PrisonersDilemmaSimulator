@@ -6,6 +6,7 @@
 
 import AIsimulation
 import AIsimulation_log
+import AIsimulation_log_sum
 import timeit
 import Always_Collude
 import Always_Defect
@@ -21,7 +22,7 @@ import TitForTat
 print(" ")
 print("Prisoner's Dilemma Simulator")
 print("By randomizer: randomizer@hanyang.ac.kr")
-print("Ver_1.3")
+print("Ver_1.5")
 print(" ")
 print(" ")
 print("Payoff Matrix")
@@ -57,10 +58,25 @@ print(" ")
 print('If "P1_Score" = "P2_Score" but do not "Coop" or "Defect",')
 print('Then it "Balance_out"')
 print(" ")
-def sim(choice):
+print('press "1" to log entire results')
+print('press "2" to log only summarized results')
+choice = 1
+log = input('Press any other key to disregard: ')
+if log == '':
+    print()
+print("--------------------------------------------------------")
+if log == '1':
+    print('Total Logging enabled', log)
+elif log == '2':
+    print('Summary Logging enabled', log)
+elif log == '':
+    print('Logging disabled')
+else:
+    print('Logging disabled')
+
+def sim(choice, log):
     if choice == 1:
-        print("--------------------------------------------------------")
-        print(log)
+        print(" ")
         print('here are the strategies, choose one')
         print(" ")
         print(choices1)
@@ -78,15 +94,18 @@ def sim(choice):
         start1 = timeit.default_timer()
         if log == '1':
             AIsimulation_log.testStrategy(strategy, repeater * 1000)
-        else:
+        if log == '2':
+            AIsimulation_log_sum.testStrategy(strategy, repeater * 1000)
+        elif log == '':
             AIsimulation.testStrategy(strategy, repeater * 1000)
         choice = 0
         stop1 = timeit.default_timer()
-        print('Printing Results Via CSV...')
+        if log == '1' or '2':
+            print('Printing Results Via CSV...')
         timer(stop1, start1)
     print(" ")
     choice = int(input('press 1 to repeat'))
-
+    print(" ")
 
 while True:
     choices1 = ['1-Always_Collude', '2-Always_Defect', '3-TitForTat']
@@ -96,14 +115,15 @@ while True:
     strategies = {1: Always_Collude, 2: Always_Defect, 3: TitForTat, 4: Total_random, 5: randomColluding,
                   6: randomDefecting,
                   7: Grim_trigger, 8: pavlov, 9: Simple_Credit_rate, 10: Generous_Credit_rate}
-    log = input('press 1 to log entire sim. Press any other key to disregard: ')
-    choice = 1
-    sim(choice)
+
+    sim(choice,log)
 
     from importlib import reload
 
     timeit = reload(timeit)
     AIsimulation = reload(AIsimulation)
+    AIsimulation_log = reload(AIsimulation_log)
+    AIsimulation_log_sum = reload(AIsimulation_log_sum)
     Simple_Credit_rate = reload(Simple_Credit_rate)
     Generous_Credit_rate = reload(Generous_Credit_rate)
     Always_Collude = reload(Always_Collude)

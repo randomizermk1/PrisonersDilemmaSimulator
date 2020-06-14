@@ -1,10 +1,11 @@
-#1 = collude 
-#0 = defect
+# 1 = collude
+# 0 = defect
 
 def play(opponentMove):
-  if opponentMove == 'start':
+    if opponentMove == 'start':
+        return 0
     return 0
-  return 0
-  
+
+
 def name():
-  return 'Always_Defect'
+    return 'Always_Defect'

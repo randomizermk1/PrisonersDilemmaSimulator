@@ -1,5 +1,5 @@
 import timeit, Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger, \
-    pavlov, Simple_Credit_rate, Generous_Credit_rate
+    pavlov, Simple_Credit_rate, Generous_Credit_rate, os.path
 
 strategies = [Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger,
               pavlov, Simple_Credit_rate, Generous_Credit_rate]
@@ -46,13 +46,13 @@ def game(player1, player2, rounds):
         if p1Score == p2Score:
             if p1Move == p2Move:
                 if (p1Score / int(rounds)) == 1:
-                    return p1Score / int(rounds),p2Score / int(rounds), (player1.name(), 'Coops', player2.name())
+                    return p1Score / int(rounds), p1Score / int(rounds) , (player1.name(), 'Coops', player2.name())
                 if (p1Score / int(rounds)) == -1:
-                    return p1Score / int(rounds), p2Score / int(rounds),(player1.name(), 'Defects', player2.name())
+                    return p1Score / int(rounds), p1Score / int(rounds) ,(player1.name(), 'Defects', player2.name())
                 else:
-                    return p1Score / int(rounds), p2Score / int(rounds),(player1.name(), 'Balance_out', player2.name())
+                    return p1Score / int(rounds), p1Score / int(rounds) ,(player1.name(), 'Balance_out', player2.name())
             else:
-                return p1Score / int(rounds), p2Score / int(rounds),(player1.name(), 'Balance_out', player2.name())
+                return p1Score / int(rounds), p1Score / int(rounds) ,(player1.name(), 'Balance_out', player2.name())
 
     else:
         if p1Score == p2Score and p1Move == p2Move:
@@ -78,6 +78,21 @@ def statlist(results):
         return round(results, 2)
 
 
+def Print_spool(Numb, strategy):
+    global name
+    r = str(round(Numb / 1000))
+    name1 = str(r + 'k' +  'Table' + '_' + strategy.name())
+    predir='./Output/'
+    if not os.path.exists(predir):
+        os.mkdir(predir)
+    directory = './Output/%s_Results/' % strategy.name()
+    file_path = os.path.join(directory, "%s.csv" % name1)
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+    f = open(file_path, "w")
+    f.write("SelfScore,W/L,OtherScore,E(u)Self,E(u)Opp" + '\n')
+    return f
+
 def timer(stop, start):
     if (stop - start) < 0.05:
         print('')
@@ -94,6 +109,7 @@ def timer(stop, start):
 def testStrategy(strategy, rep):
     global opscore, selfscore, start1, x1, x2, E2, E1
 
+    fi = Print_spool(rep, strategy)
     print("--------------------------------------------------------")
     print('P1=', strategy.name())
     print('When N =', rep)
@@ -105,16 +121,19 @@ def testStrategy(strategy, rep):
             Fscores[strategy.name()] += otherS
             opscore = Fscores[strategy.name()] / 10
             a, b, c = x
+            var1 = (a + ", " + b + ", " + c + ", " + str(otherS)+ ", "+ str(otherO))
+            fi.write(f"{var1}\n")
             print(a, b, 'VS', c)
             if otherS == otherO:
                 print('With E(u):', statlist(otherS))
             else:
                 print('With P1 E(u):', statlist(otherS), 'P2 E(u):', otherO)
-
         else:
             selfS, p1, p2, x = game(strategy, s, rep)
             selfscore = selfS
             a, b, c = x
+            var1 = (a + ", " + b + ", " + c + ", " + str(p1)+ ", "+ str(p2))
+            fi.write(f"{var1}\n")
             print(a, b, 'VS', c)
             print('With E(u):', 'p1:', statlist(p1), 'p2:', statlist(p2), )
             print('With AVG:', statlist(selfS))
@@ -131,3 +150,7 @@ def testStrategy(strategy, rep):
     print("VS_self", statlist(selfscore))
     print("VS_OPP", statlist(opscore))
 
+    var1 = ("TotalAVG " + str(((opscore * 10) + selfscore) / 11) + ", " + "VS_self " + str(
+        statlist(selfscore)) + "," + "VS_OPP" + str(statlist(opscore)) + "," + 'Total trials ' + str(rep))
+    fi.write(f"{var1}\n")
+    fi.close()
