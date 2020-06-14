@@ -84,8 +84,11 @@ def statlist(results):
 def Print_spool(Numb, strategy):
     global name
     r = str(round(Numb / 1000))
-    name1 = str(r + 'k' + '_' + strategy.name())
-    directory = './%s_Sum/' % strategy.name()
+    name1 = str(r + 'k' +  'Table' + '_' + strategy.name())
+    predir='./Output/'
+    if os.path.isabs(predir):
+        os.mkdir(predir)
+    directory = './Output/%s_Results/' % strategy.name()
     file_path = os.path.join(directory, "%s.csv" % name1)
     if not os.path.isdir(directory):
         os.mkdir(directory)
@@ -96,8 +99,11 @@ def Print_spool(Numb, strategy):
 
 
 def Print_spool0(Numb, playername1 , playername2):
-    name1 = str(playername1 + '_' + playername2 + str(Numb/1000)+'k')
-    directory = './%s_log/' % playername1
+    name1 = str('VS'+ '_' + playername2 + '_' + str(Numb/1000)+'k')
+    predir = './Output/'
+    if os.path.isabs(predir):
+        os.mkdir(predir)
+    directory = './Output/%s_log/' % playername1
     file_path = os.path.join(directory, "%s_log.csv" % name1)
     if not os.path.isdir(directory):
         os.mkdir(directory)

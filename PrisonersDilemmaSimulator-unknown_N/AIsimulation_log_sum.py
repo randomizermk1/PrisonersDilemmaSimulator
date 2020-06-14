@@ -82,7 +82,7 @@ def Print_spool(Numb, strategy):
     global name
     r = str(round(Numb / 1000))
     name1 = str(r + 'k' + '_' + strategy.name())
-    directory = './%s_Sum/' % strategy.name()
+    directory = './Output/%s_Results/' % strategy.name()
     file_path = os.path.join(directory, "%s.csv" % name1)
     if not os.path.isdir(directory):
         os.mkdir(directory)

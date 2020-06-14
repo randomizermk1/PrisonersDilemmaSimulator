@@ -22,7 +22,7 @@ import TitForTat
 print(" ")
 print("Prisoner's Dilemma Simulator")
 print("By randomizer: randomizer@hanyang.ac.kr")
-print("Ver_1.4")
+print("Ver_1.5")
 print(" ")
 print(" ")
 print("Payoff Matrix")
@@ -58,15 +58,17 @@ print(" ")
 print('If "P1_Score" = "P2_Score" but do not "Coop" or "Defect",')
 print('Then it "Balance_out"')
 print(" ")
-def sim(choice):
+def sim(choice, log):
     if choice == 1:
         print("--------------------------------------------------------")
-        if log == "1":
-            print('Total Logging enabled')
-        if log == "2":
-            print('Summary Logging enabled')
+        if log == '1':
+            print('Total Logging enabled',log)
+        elif log == '2':
+            print('Summary Logging enabled',log)
+        elif log == '':
+            print('Logging disabled',log)
         else:
-            print('Logging disabled')
+            print('Logging disabled',log)
         print(" ")
         print('here are the strategies, choose one')
         print(" ")
@@ -84,14 +86,17 @@ def sim(choice):
         repeater = int(input('choose repeats via number:'))
         start1 = timeit.default_timer()
         if log == '1':
+            print(log)
             AIsimulation_log.testStrategy(strategy, repeater * 1000)
         if log == '2':
+            print(log)
             AIsimulation_log_sum.testStrategy(strategy, repeater * 1000)
         else:
+            print(log)
             AIsimulation.testStrategy(strategy, repeater * 1000)
         choice = 0
         stop1 = timeit.default_timer()
-        if log == "1":
+        if log == '1' or '2':
             print('Printing Results Via CSV...')
         timer(stop1, start1)
     print(" ")
@@ -106,11 +111,11 @@ while True:
     strategies = {1: Always_Collude, 2: Always_Defect, 3: TitForTat, 4: Total_random, 5: randomColluding,
                   6: randomDefecting,
                   7: Grim_trigger, 8: pavlov, 9: Simple_Credit_rate, 10: Generous_Credit_rate}
-    print('press 1 to log entire results')
-    print('press 2 to log only summarized results')
-    log = input('Press any other key to disregard: ')
+    print('press "1" to log entire results')
+    print('press "2" to log only summarized results')
     choice = 1
-    sim(choice)
+    log = input('Press any other key to disregard: ')
+    sim(choice, log)
 
     from importlib import reload
 
