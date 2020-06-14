@@ -86,7 +86,7 @@ def Print_spool(Numb, strategy):
     r = str(round(Numb / 1000))
     name1 = str(r + 'k' +  'Table' + '_' + strategy.name())
     predir='./Output/'
-    if os.path.isabs(predir):
+    if not os.path.exists(predir):
         os.mkdir(predir)
     directory = './Output/%s_Results/' % strategy.name()
     file_path = os.path.join(directory, "%s.csv" % name1)

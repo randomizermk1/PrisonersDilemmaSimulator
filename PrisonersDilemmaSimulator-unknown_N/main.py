@@ -66,9 +66,9 @@ def sim(choice, log):
         elif log == '2':
             print('Summary Logging enabled',log)
         elif log == '':
-            print('Logging disabled',log)
+            print('Logging disabled')
         else:
-            print('Logging disabled',log)
+            print('Logging disabled')
         print(" ")
         print('here are the strategies, choose one')
         print(" ")
