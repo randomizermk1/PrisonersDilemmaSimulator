@@ -12,3 +12,5 @@ def play(opponentMove):
 
 def name():
     return 'Total_random'
+
+# todo how to normalize fluxing points

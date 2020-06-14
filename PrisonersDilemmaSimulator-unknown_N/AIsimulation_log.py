@@ -83,7 +83,7 @@ def statlist(results):
 
 def Print_spool(Numb, strategy):
     global name
-    r = str(round(Numb / 1000))
+    r = str(round((Numb / 1000),1))
     name1 = str(r + 'k' +  'Table' + '_' + strategy.name())
     predir='./Output/'
     if not os.path.exists(predir):
@@ -99,7 +99,7 @@ def Print_spool(Numb, strategy):
 
 
 def Print_spool0(Numb, playername1 , playername2):
-    name1 = str('VS'+ '_' + playername2 + '_' + str(Numb/1000)+'k')
+    name1 = str('VS'+ '_' + playername2 + '_' + str(round((Numb / 1000),1))+'k')
     predir = './Output/'
     if os.path.isabs(predir):
         os.mkdir(predir)
