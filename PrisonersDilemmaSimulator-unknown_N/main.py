@@ -60,15 +60,6 @@ print('Then it "Balance_out"')
 print(" ")
 def sim(choice, log):
     if choice == 1:
-        print("--------------------------------------------------------")
-        if log == '1':
-            print('Total Logging enabled',log)
-        elif log == '2':
-            print('Summary Logging enabled',log)
-        elif log == '':
-            print('Logging disabled')
-        else:
-            print('Logging disabled')
         print(" ")
         print('here are the strategies, choose one')
         print(" ")
@@ -86,13 +77,10 @@ def sim(choice, log):
         repeater = int(input('choose repeats via number:'))
         start1 = timeit.default_timer()
         if log == '1':
-            print(log)
             AIsimulation_log.testStrategy(strategy, repeater * 1000)
         if log == '2':
-            print(log)
             AIsimulation_log_sum.testStrategy(strategy, repeater * 1000)
-        else:
-            print(log)
+        elif log == '':
             AIsimulation.testStrategy(strategy, repeater * 1000)
         choice = 0
         stop1 = timeit.default_timer()
@@ -115,7 +103,18 @@ while True:
     print('press "2" to log only summarized results')
     choice = 1
     log = input('Press any other key to disregard: ')
-    sim(choice, log)
+    if log == '':
+        print()
+    print("--------------------------------------------------------")
+    if log == '1':
+        print('Total Logging enabled', log)
+    elif log == '2':
+        print('Summary Logging enabled', log)
+    elif log == '':
+        print('Logging disabled')
+    else:
+        print('Logging disabled')
+    sim(choice,log)
 
     from importlib import reload
 

@@ -55,7 +55,7 @@ def game(player1, player2, rounds):
                 return p1Score / int(rounds), p1Score / int(rounds) ,(player1.name(), 'Balance_out', player2.name())
 
     else:
-        if p1Move == p2Move:
+        if p1Score == p2Score and p1Move == p2Move:
             if p1Score < 0:
                 return (p1Score + p2Score) / (2 * int(rounds)), p1Score / int(rounds), p2Score / int(rounds), (
                 player1.name(), 'Defects', player1.name())
@@ -64,7 +64,7 @@ def game(player1, player2, rounds):
                 player1.name(), 'Coops', player1.name())
         else:
             return (p1Score + p2Score) / (2 * int(rounds)), p1Score / int(rounds), p2Score / int(rounds), (
-                player1.name(), 'Oscillates', player1.name())
+                player1.name(), 'Diverges', player1.name())
 
 
 def statlist(results):
