@@ -6,23 +6,22 @@ import random
 def name():
     return 'Generous_Credit_rate'
 
-opponentMove = 0
+
 
 
 def play(opponentMove):
+    opponentHistory = []
+    opponentHistory.append(opponentMove)
+    myhistory = []
     if opponentMove == 'start':
-        return 1
-
-
-opponentHistory = [opponentMove]
-
-
-def play(myMove):
-    if myMove: return 1
-    myhistory = [myMove]
-    average = sum(opponentHistory) + sum(myhistory)/(len(myhistory) + len(opponentHistory))
-    val = random.randint(0, 100000)
-    if average >= (val/100000):
+        myhistory.append(1)
         return 1
     else:
-        return 0
+        val = random.randint(1, (len(myhistory) + len(opponentHistory)))
+        if val <= sum(opponentHistory) + sum(myhistory):
+            myhistory.append(1)
+            return 1
+        else:
+            return 0
+
+    # average = sum(opponentHistory) + sum(myhistory)/(len(myhistory) + len(opponentHistory))
