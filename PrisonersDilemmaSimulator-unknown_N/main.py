@@ -58,6 +58,22 @@ print(" ")
 print('If "P1_Score" = "P2_Score" but do not "Coop" or "Defect",')
 print('Then it "Balance_out"')
 print(" ")
+print('press "1" to log entire results')
+print('press "2" to log only summarized results')
+choice = 1
+log = input('Press any other key to disregard: ')
+if log == '':
+    print()
+print("--------------------------------------------------------")
+if log == '1':
+    print('Total Logging enabled', log)
+elif log == '2':
+    print('Summary Logging enabled', log)
+elif log == '':
+    print('Logging disabled')
+else:
+    print('Logging disabled')
+
 def sim(choice, log):
     if choice == 1:
         print(" ")
@@ -99,27 +115,15 @@ while True:
     strategies = {1: Always_Collude, 2: Always_Defect, 3: TitForTat, 4: Total_random, 5: randomColluding,
                   6: randomDefecting,
                   7: Grim_trigger, 8: pavlov, 9: Simple_Credit_rate, 10: Generous_Credit_rate}
-    print('press "1" to log entire results')
-    print('press "2" to log only summarized results')
-    choice = 1
-    log = input('Press any other key to disregard: ')
-    if log == '':
-        print()
-    print("--------------------------------------------------------")
-    if log == '1':
-        print('Total Logging enabled', log)
-    elif log == '2':
-        print('Summary Logging enabled', log)
-    elif log == '':
-        print('Logging disabled')
-    else:
-        print('Logging disabled')
+
     sim(choice,log)
 
     from importlib import reload
 
     timeit = reload(timeit)
     AIsimulation = reload(AIsimulation)
+    AIsimulation_log = reload(AIsimulation_log)
+    AIsimulation_log_sum = reload(AIsimulation_log_sum)
     Simple_Credit_rate = reload(Simple_Credit_rate)
     Generous_Credit_rate = reload(Generous_Credit_rate)
     Always_Collude = reload(Always_Collude)
