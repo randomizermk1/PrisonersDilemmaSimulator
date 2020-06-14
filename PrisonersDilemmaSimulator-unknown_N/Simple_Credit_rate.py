@@ -13,9 +13,8 @@ def play(opponentMove):
         return 1
     else:
         opponentHistory.append(opponentMove)
-    average = sum(opponentHistory) / len(opponentHistory)
-    val = random.randint(0, 1000000)
-    if average >= (val / 1000000):
+    val = random.randint(1, len(opponentHistory))
+    if val <= sum(opponentHistory):
         return 1
     else:
         return 0
