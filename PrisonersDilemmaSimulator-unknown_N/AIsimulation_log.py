@@ -138,7 +138,7 @@ def testStrategy(strategy, rep):
         if s != strategy:
             otherS, otherO, x = game(strategy, s, rep)
             Fscores[strategy.name()] += otherS
-            opscore = Fscores[strategy.name()] / 10
+            opscore = Fscores[strategy.name()] / (len(strategies) - 1)
             a, b, c = x
             var1 = (a + ", " + b + ", " + c + ", " + str(otherS)+ ", "+ str(otherO))
             fi.write(f"{var1}\n")

@@ -103,7 +103,7 @@ def testStrategy(strategy, rep):
         if s != strategy:
             otherS, otherO, x = game(strategy, s, rep)
             Fscores[strategy.name()] += otherS
-            opscore = Fscores[strategy.name()] / 10
+            opscore = Fscores[strategy.name()] / (len(strategies) - 1)
             a, b, c = x
             print(a, b, 'VS', c)
             if otherS == otherO:
