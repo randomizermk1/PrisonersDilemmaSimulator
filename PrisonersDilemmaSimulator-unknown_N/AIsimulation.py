@@ -106,8 +106,8 @@ def timer(stop, start):
 def testStrategy(strategy, rep):
     global opscore, selfscore, start1, x1, x2, E2, E1
 
-    fi = Print_spool(rep, strategy)
     print("--------------------------------------------------------")
+    print('P1=', strategy.name())
     print('When N =', rep)
     print(" ")
     for s in strategies:
@@ -117,20 +117,16 @@ def testStrategy(strategy, rep):
             Fscores[strategy.name()] += otherS
             opscore = Fscores[strategy.name()] / 10
             a, b, c = x
-            var1 = (a + ", " + b + ", " + c + ", " + str(otherS)+ ", "+ str(otherO))
-            fi.write(f"{var1}\n")
             print(a, b, 'VS', c)
             if otherS == otherO:
                 print('With E(u):', statlist(otherS))
             else:
-                print('With E(u):', statlist(otherS), 'P2 E(u):', otherO)
+                print('With P1 E(u):', statlist(otherS), 'P2 E(u):', otherO)
 
         else:
             selfS, p1, p2, x = game(strategy, s, rep)
             selfscore = selfS
             a, b, c = x
-            var1 = (a + ", " + b + ", " + c + ", " + str(p1)+ ", "+ str(p2))
-            fi.write(f"{var1}\n")
             print(a, b, 'VS', c)
             print('With E(u):', 'p1:', statlist(p1), 'p2:', statlist(p2), )
             print('With AVG:', statlist(selfS))
@@ -147,7 +143,3 @@ def testStrategy(strategy, rep):
     print("VS_self", statlist(selfscore))
     print("VS_OPP", statlist(opscore))
 
-    var1 = ("TotalAVG " + str(((opscore * 10) + selfscore) / 11) + ", " + "VS_self " + str(
-        statlist(selfscore)) + "," + "VS_OPP" + str(statlist(opscore)) + "," + 'Total trials ' + str(rep))
-    fi.write(f"{var1}\n")
-    fi.close()

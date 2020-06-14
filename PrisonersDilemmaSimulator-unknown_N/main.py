@@ -21,7 +21,7 @@ import TitForTat
 print(" ")
 print("Prisoner's Dilemma Simulator")
 print("By randomizer: randomizer@hanyang.ac.kr")
-print("Ver_1.3")
+print("Ver_1.4")
 print(" ")
 print(" ")
 print("Payoff Matrix")
@@ -60,7 +60,10 @@ print(" ")
 def sim(choice):
     if choice == 1:
         print("--------------------------------------------------------")
-        print(log)
+        if log == "1":
+            print('Logging enabled')
+        else:
+            print('Logging disabled')
         print('here are the strategies, choose one')
         print(" ")
         print(choices1)
@@ -82,7 +85,8 @@ def sim(choice):
             AIsimulation.testStrategy(strategy, repeater * 1000)
         choice = 0
         stop1 = timeit.default_timer()
-        print('Printing Results Via CSV...')
+        if log == "1":
+            print('Printing Results Via CSV...')
         timer(stop1, start1)
     print(" ")
     choice = int(input('press 1 to repeat'))

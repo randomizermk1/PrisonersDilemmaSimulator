@@ -118,6 +118,7 @@ def testStrategy(strategy, rep):
 
     fi = Print_spool(rep, strategy)
     print("--------------------------------------------------------")
+    print('P1=', strategy.name())
     print('When N =', rep)
     print(" ")
     for s in strategies:
