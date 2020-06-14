@@ -1,5 +1,5 @@
 import timeit, Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger, \
-    pavlov, Simple_Credit_rate, Generous_Credit_rate, os.path
+    pavlov, Simple_Credit_rate, Generous_Credit_rate
 
 strategies = [Always_Collude, Always_Defect, TitForTat, Total_random, randomColluding, randomDefecting, Grim_trigger,
               pavlov, Simple_Credit_rate, Generous_Credit_rate]
